@@ -1,11 +1,18 @@
 import React from 'react';
-import {View, StyleSheet} from 'react-native';
+import {StyleSheet} from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import homeScreen from './screens/homeScreen';
+import ScoutNav from './routes/scoutStack'
+import matchScout from './screens/matchScout'
 
 const App = () => {
   return (
-    <View style = {styles.container}>
-      
-    </View>
+    <NavigationContainer>
+      <ScoutNav.Navigator initialRouteName = "Home">
+        <ScoutNav.Screen name = "Home" component = {homeScreen} />
+        <ScoutNav.Screen name = "Match Scout" component = {matchScout} />
+      </ScoutNav.Navigator> 
+    </NavigationContainer>
   );
 };
 
