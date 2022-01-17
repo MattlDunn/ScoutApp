@@ -1,28 +1,27 @@
 import React from 'react';
 import {StyleSheet} from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import homeScreen from './screens/homeScreen';
-import ScoutNav from './routes/scoutStack'
-import matchScout from './screens/matchScout'
+import NewPresetScreen from './screens/newPresetScreen';
+import NewEvent from './screens/newEventScreen';
+
+const HomeNav = createNativeStackNavigator();
 
 const App = () => {
   return (
     <NavigationContainer>
-      <ScoutNav.Navigator initialRouteName = "Home">
-        <ScoutNav.Screen name = "Home" component = {homeScreen} />
-        <ScoutNav.Screen name = "Match Scout" component = {matchScout} />
-      </ScoutNav.Navigator> 
+      <HomeNav.Navigator initialRouteName = "Home" screenOptions = {{ headerStyle: { backgroundColor: 'green', alignItems: 'center' }, headerTitleAlign: 'center' }}>
+        <HomeNav.Screen name = "Home" component = {homeScreen} />
+        <HomeNav.Screen name = "New Event" component = {NewEvent} />
+        <HomeNav.Screen name = "New Preset" component = {NewPresetScreen} />
+      </HomeNav.Navigator> 
     </NavigationContainer>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-
+  
 });
 
 export default App;

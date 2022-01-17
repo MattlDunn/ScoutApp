@@ -8,6 +8,12 @@ const HomeScreen = ({ navigation }) => {
   const [username, setUsername] = useState("username");
   const [usernameText, setUsernameText] = useState("");
 
+  const [isServer, setIsServer] = useState(false);
+
+  const [eventList, setEventList] = useState(["Waterloo", "Northbay"]);
+
+  const [presetList, setPresetList] = useState(["Preset 1", "Preset 2"]);
+
   function confirmUsername(newName) {
     setIsEditUsername(false);
     setUsername(newName);
@@ -17,7 +23,7 @@ const HomeScreen = ({ navigation }) => {
   return (
     <View style = {styles.container}>
       
-      <View style = {styles.adminContainer}>
+      <View style = {styles.section}>
         {
           isEditUsername ?
           <View style = {styles.usernameContainer}>
@@ -33,14 +39,45 @@ const HomeScreen = ({ navigation }) => {
 
         <View style = {styles.toggleServerContainer}>
           <Text style = {styles.basicText}>Toggle Server</Text>
-          <Switch style = {styles.serverSwitch}></Switch>
-        </View>
-
-        <View style = {styles.scoutBtnContainer}>
-          <Button title = "scout" onPress = {() => navigation.navigate('Match Scout')}></Button>
+          <Switch style = {styles.serverSwitch} value = {isServer} onValueChange = {() => setIsServer(!isServer)}></Switch>
         </View>
         
       </View>
+
+      <View style = {styles.section}>
+        
+        <View style = {styles.newBtns}>
+          <Button title = "Add New Event" onPress = {() => navigation.navigate('New Event')}></Button>
+        </View>
+
+        {
+          eventList.map((item, key) => (
+          <View>
+              <Text style = {styles.basicText} key = {key}>{ item }</Text>
+              <Icon style = {styles.editNameButton} name = "edit" size = {24} color = "black"></Icon>
+          </View>
+          ))
+        }
+      
+      </View>
+
+      <View style = {styles.section}>
+
+        <View style = {styles.newBtns}>
+          <Button title = "Add New Preset" onPress = {() => navigation.navigate('New Preset')}></Button>
+        </View>
+
+        {
+          presetList.map((item, key) => (
+          <View>
+            <Text style = {styles.basicText} key = {key}>{ item }</Text>
+            <Icon style = {styles.editNameButton} name = "edit" size = {24} color = "black"></Icon>
+          </View>
+          ))
+        }
+
+      </View>
+
     
     </View>
   );
@@ -52,10 +89,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
 
-  adminContainer: {
+  section: {
     margin: 10,
+    marginBottom: 0,
     alignSelf: 'stretch',
-    backgroundColor: 'darkslateblue'
+    backgroundColor: 'darkslateblue',
   },
 
   usernameContainer: {
@@ -65,7 +103,7 @@ const styles = StyleSheet.create({
     margin: 10,
     marginBottom: 5,
     backgroundColor: '#fff',
-    height: 32
+    height: 32,
   },
 
   basicText: {
@@ -82,7 +120,7 @@ const styles = StyleSheet.create({
     height: 32,
     textAlignVertical: 'center',
     padding: 1,
-    paddingLeft: 4
+    paddingLeft: 4,
   },
 
   editNameButton: {
@@ -93,14 +131,13 @@ const styles = StyleSheet.create({
   confirmNameButton: {
     right: 10,
     position: 'absolute',
-    color: 'green'
+    color: 'green',
   },
 
   toggleServerContainer: {
     backgroundColor: '#fff',
     margin: 10,
     marginTop: 5,
-    marginBottom: 5,
     height: 32,
     flexDirection: 'row',
   },
@@ -110,11 +147,10 @@ const styles = StyleSheet.create({
     position: 'absolute',
   },
 
-  scoutBtnContainer: {
+  newBtns: {
     alignSelf: 'stretch',
     margin: 10,
-    marginTop: 5,
-  },
+  }
 
 });
 
