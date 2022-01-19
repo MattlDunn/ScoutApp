@@ -5,10 +5,7 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 const NewPresetScreen = ({ navigation }) => {
   
   function DisplayMetric(props) {
-    console.log(props.item)
-    console.log(props.item.type)
     if (props.item.type == "header") {
-      console.log(props.item)
       return (
         <Text style = { styles.basicText }>{ props.item.name }</Text>
       );

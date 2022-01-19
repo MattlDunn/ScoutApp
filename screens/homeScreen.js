@@ -52,8 +52,8 @@ const HomeScreen = ({ navigation }) => {
 
         {
           eventList.map((item, key) => (
-          <View>
-              <Text style = {styles.basicText} key = {key}>{ item }</Text>
+          <View key = {key}>
+              <Text style = {styles.basicText}>{ item }</Text>
               <Icon style = {styles.editNameButton} name = "edit" size = {24} color = "black"></Icon>
           </View>
           ))
@@ -69,8 +69,8 @@ const HomeScreen = ({ navigation }) => {
 
         {
           presetList.map((item, key) => (
-          <View>
-            <Text style = {styles.basicText} key = {key}>{ item }</Text>
+          <View key = {key}>
+            <Text style = {styles.basicText}>{ item }</Text>
             <Icon style = {styles.editNameButton} name = "edit" size = {24} color = "black"></Icon>
           </View>
           ))

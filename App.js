@@ -8,7 +8,7 @@ import NewEvent from './screens/newEventScreen';
 
 const HomeNav = createNativeStackNavigator();
 
-const App = () => {
+function Navigation() {
   return (
     <NavigationContainer>
       <HomeNav.Navigator initialRouteName = "Home" screenOptions = {{ headerStyle: { backgroundColor: 'green', alignItems: 'center' }, headerTitleAlign: 'center' }}>
@@ -17,6 +17,12 @@ const App = () => {
         <HomeNav.Screen name = "New Preset" component = {NewPresetScreen} />
       </HomeNav.Navigator> 
     </NavigationContainer>
+  );
+}
+
+const App = () => {
+  return (
+    <Navigation />
   );
 };
 
