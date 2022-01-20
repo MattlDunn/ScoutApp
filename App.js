@@ -1,5 +1,4 @@
 import React from 'react';
-import {StyleSheet} from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import homeScreen from './screens/homeScreen';
@@ -8,10 +7,12 @@ import NewEvent from './screens/newEventScreen';
 
 const HomeNav = createNativeStackNavigator();
 
-function Navigation() {
+function Navigation({ theme }) {
   return (
-    <NavigationContainer>
-      <HomeNav.Navigator initialRouteName = "Home" screenOptions = {{ headerStyle: { backgroundColor: 'green', alignItems: 'center' }, headerTitleAlign: 'center' }}>
+    <NavigationContainer theme = { theme }>
+      <HomeNav.Navigator initialRouteName = "Home" 
+        screenOptions = {{ headerStyle: { backgroundColor: '#1C1C1C', alignItems: 'center' }, 
+        headerTitleAlign: 'center', headerTitleStyle: { color: 'white' } }}>
         <HomeNav.Screen name = "Home" component = {homeScreen} />
         <HomeNav.Screen name = "New Event" component = {NewEvent} />
         <HomeNav.Screen name = "New Preset" component = {NewPresetScreen} />
@@ -26,8 +27,5 @@ const App = () => {
   );
 };
 
-const styles = StyleSheet.create({
-  
-});
 
 export default App;

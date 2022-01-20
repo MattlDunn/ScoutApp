@@ -3,6 +3,17 @@ import {View, StyleSheet, Text, Button} from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
 const NewPresetScreen = ({ navigation }) => {
+
+  // Save button top right of header
+  React.useLayoutEffect(() => {
+    navigation.setOptions({
+      headerRight: () => (
+        <TouchableOpacity>
+          <Text>Save</Text>
+        </TouchableOpacity>
+      ),
+    });
+  }, [navigation]);
   
   function DisplayMetric(props) {
     if (props.item.type == "header") {
@@ -15,16 +26,6 @@ const NewPresetScreen = ({ navigation }) => {
       );
     }
   }
-
-  React.useLayoutEffect(() => {
-    navigation.setOptions({
-      headerRight: () => (
-        <TouchableOpacity>
-          <Text>Save</Text>
-        </TouchableOpacity>
-      ),
-    });
-  }, [navigation]);
 
   const defMetrics = [
     {
