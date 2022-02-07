@@ -26,7 +26,7 @@ const HomeScreen = ({ navigation }) => {
   }
 
   return (
-    <View style = {styles.container}>
+    <View style = {globalStyles.container}>
       
       <View style = {styles.section}>
         {
@@ -89,12 +89,6 @@ const HomeScreen = ({ navigation }) => {
 };
 
 const useStyles = theme => (StyleSheet.create(({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    backgroundColor: theme.colors.background,
-  },
-
   section: {
     margin: 10,
     marginBottom: 0,

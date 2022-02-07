@@ -1,9 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import {View, StyleSheet, Text, Button, SafeAreaView} from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
-import { Searchbar } from 'react-native-paper';
+import { Searchbar, useTheme } from 'react-native-paper';
 
 const NewEventScreen = () => {
+  const theme = useTheme();
+  const styles = useStyles(theme)
+  const globalStyles = require('../globalStyles');
+
   const [search, setSearch] = useState('');
   const [eventList, setEventList] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -25,14 +29,22 @@ const NewEventScreen = () => {
     ).finally(() => setIsLoading(false));
   }, []);
 
-  function TeamList() {
+  function DisplaySearched(props) {
+    if (props.name.toLowerCase().includes(search)) {
+      return (
+        <Text>{ props.name }</Text>
+      )
+    } else {
+      return null;
+    }
+  }
+
+  function EventList() {
     return (
       <View>
         {
           eventList.map((item, key) => (
-            <View key = {key}>
-              <Text>{ item.name }</Text>
-            </View>
+            <DisplaySearched name = {item.name} key = {key}/>
           ))
         } 
       </View>
@@ -40,17 +52,17 @@ const NewEventScreen = () => {
   }
     
   return (
-    <View style = {styles.container}>
+    <View style = {globalStyles.container}>
       {
         isLoading ?
         <Text>Loading</Text>
         :
-        <View style = {styles.container}>
-          <Searchbar placeholder = "Search for event" onChangeText = { onChangeSearch } value = { search }/>
+        <View style = {globalStyles.container}>
+          <Searchbar style = {styles.search} placeholder = "Search for event"  onChangeText = { onChangeSearch } value = { search }/>
 
-          <SafeAreaView style = {styles.container}>
+          <SafeAreaView style = {globalStyles.container}>
             <ScrollView>
-                <TeamList />
+                <EventList />
             </ScrollView>
           </SafeAreaView>
         </View>
@@ -59,12 +71,11 @@ const NewEventScreen = () => {
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
+const useStyles = theme => (StyleSheet.create(({
+  search: {
+    borderRadius: 0,
   },
 
-});
+})));
 
 export default NewEventScreen;
