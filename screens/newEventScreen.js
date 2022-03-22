@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import {View, StyleSheet, Text, Button, SafeAreaView} from 'react-native';
+import {View, StyleSheet, Text, Button, SafeAreaView, TouchableOpacity} from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import { Searchbar, useTheme } from 'react-native-paper';
 
-const NewEventScreen = () => {
+const NewEventScreen = ({ navigation }) => {
   const theme = useTheme();
   const styles = useStyles(theme)
   const globalStyles = require('../globalStyles');
@@ -29,10 +29,19 @@ const NewEventScreen = () => {
     ).finally(() => setIsLoading(false));
   }, []);
 
+  function navigateToPreset(eventInfo) {
+    navigation.navigate(
+      'Select Preset',
+      { eventInfo }
+    );
+  }
+
   function DisplaySearched(props) {
     if (props.name.toLowerCase().includes(search)) {
       return (
-        <Text>{ props.name }</Text>
+        <TouchableOpacity style = {styles.eventTextBox} onPress = {() => navigateToPreset(props.eventInfo) }>
+          <Text style = {styles.eventText}>{ props.name }</Text>
+        </TouchableOpacity>
       )
     } else {
       return null;
@@ -41,10 +50,10 @@ const NewEventScreen = () => {
 
   function EventList() {
     return (
-      <View>
+      <View styles = {globalStyles.fullWidth}>
         {
           eventList.map((item, key) => (
-            <DisplaySearched name = {item.name} key = {key}/>
+            <DisplaySearched name = {item.name} eventInfo = {item} key = {key}/>
           ))
         } 
       </View>
@@ -61,7 +70,7 @@ const NewEventScreen = () => {
           <Searchbar style = {styles.search} placeholder = "Search for event"  onChangeText = { onChangeSearch } value = { search }/>
 
           <SafeAreaView style = {globalStyles.container}>
-            <ScrollView>
+            <ScrollView style = {globalStyles.fullWidth}>
                 <EventList />
             </ScrollView>
           </SafeAreaView>
@@ -74,6 +83,20 @@ const NewEventScreen = () => {
 const useStyles = theme => (StyleSheet.create(({
   search: {
     borderRadius: 0,
+  },
+
+  eventTextBox: {
+    flex: 1,
+    borderWidth: 1,
+    alignContent: 'center',
+    height: 40,
+    textAlignVertical: 'center'
+  },
+
+  eventText: {
+    flex: 1,
+    textAlignVertical: 'center',
+    marginLeft: 10
   },
 
 })));

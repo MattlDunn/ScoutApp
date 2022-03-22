@@ -10,4 +10,9 @@ module.exports = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
     },
+
+    fullWidth: {
+        flex: 1,
+        alignSelf: 'stretch'
+    },
 });
