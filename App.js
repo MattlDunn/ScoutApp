@@ -4,6 +4,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import homeScreen from './screens/homeScreen';
 import NewPresetScreen from './screens/newPresetScreen';
 import NewEvent from './screens/newEventScreen';
+import SelectPresetScreen from './screens/selectPresetScreen';
 
 const HomeNav = createNativeStackNavigator();
 
@@ -16,6 +17,7 @@ function Navigation({ theme }) {
         <HomeNav.Screen name = "Home" component = {homeScreen} />
         <HomeNav.Screen name = "New Event" component = {NewEvent} />
         <HomeNav.Screen name = "New Preset" component = {NewPresetScreen} />
+        <HomeNav.Screen name = "Select Preset" component = {SelectPresetScreen} />
       </HomeNav.Navigator> 
     </NavigationContainer>
   );

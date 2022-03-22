@@ -1,9 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import {View, StyleSheet, Text, Button, SafeAreaView} from 'react-native';
+import {View, StyleSheet, Text, Button, SafeAreaView, TouchableOpacity} from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
-import { Searchbar } from 'react-native-paper';
+import { Searchbar, useTheme } from 'react-native-paper';
 
-const NewEventScreen = () => {
+const NewEventScreen = ({ navigation }) => {
+  const theme = useTheme();
+  const styles = useStyles(theme)
+  const globalStyles = require('../globalStyles');
+
   const [search, setSearch] = useState('');
   const [eventList, setEventList] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -25,14 +29,31 @@ const NewEventScreen = () => {
     ).finally(() => setIsLoading(false));
   }, []);
 
-  function TeamList() {
+  function navigateToPreset(eventInfo) {
+    navigation.navigate(
+      'Select Preset',
+      { eventInfo }
+    );
+  }
+
+  function DisplaySearched(props) {
+    if (props.name.toLowerCase().includes(search)) {
+      return (
+        <TouchableOpacity style = {styles.eventTextBox} onPress = {() => navigateToPreset(props.eventInfo) }>
+          <Text style = {styles.eventText}>{ props.name }</Text>
+        </TouchableOpacity>
+      )
+    } else {
+      return null;
+    }
+  }
+
+  function EventList() {
     return (
-      <View>
+      <View styles = {globalStyles.fullWidth}>
         {
           eventList.map((item, key) => (
-            <View key = {key}>
-              <Text>{ item.name }</Text>
-            </View>
+            <DisplaySearched name = {item.name} eventInfo = {item} key = {key}/>
           ))
         } 
       </View>
@@ -40,17 +61,17 @@ const NewEventScreen = () => {
   }
     
   return (
-    <View style = {styles.container}>
+    <View style = {globalStyles.container}>
       {
         isLoading ?
         <Text>Loading</Text>
         :
-        <View style = {styles.container}>
-          <Searchbar placeholder = "Search for event" onChangeText = { onChangeSearch } value = { search }/>
+        <View style = {globalStyles.container}>
+          <Searchbar style = {styles.search} placeholder = "Search for event"  onChangeText = { onChangeSearch } value = { search }/>
 
-          <SafeAreaView style = {styles.container}>
-            <ScrollView>
-                <TeamList />
+          <SafeAreaView style = {globalStyles.container}>
+            <ScrollView style = {globalStyles.fullWidth}>
+                <EventList />
             </ScrollView>
           </SafeAreaView>
         </View>
@@ -59,12 +80,25 @@ const NewEventScreen = () => {
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
+const useStyles = theme => (StyleSheet.create(({
+  search: {
+    borderRadius: 0,
   },
 
-});
+  eventTextBox: {
+    flex: 1,
+    borderWidth: 1,
+    alignContent: 'center',
+    height: 40,
+    textAlignVertical: 'center'
+  },
+
+  eventText: {
+    flex: 1,
+    textAlignVertical: 'center',
+    marginLeft: 10
+  },
+
+})));
 
 export default NewEventScreen;
