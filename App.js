@@ -1,20 +1,52 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import 'react-native-gesture-handler';
+import { DarkTheme, Provider as PaperProvider } from 'react-native-paper';
 
-export default function App() {
+import homeScreen from './screens/homeScreen';
+import NewPresetScreen from './screens/newPresetScreen';
+import NewEvent from './screens/newEventScreen';
+import SelectPresetScreen from './screens/selectPresetScreen';
+
+const HomeNav = createNativeStackNavigator();
+
+function Navigation({ theme }) {
   return (
-    <View style={styles.container}>
-      <Text>Test!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer theme={theme}>
+      <HomeNav.Navigator initialRouteName="Home"
+        screenOptions={{
+          headerStyle: { backgroundColor: '#1C1C1C', alignItems: 'center' },
+          headerTitleAlign: 'center', headerTitleStyle: { color: 'white' }
+        }}>
+        <HomeNav.Screen name="Home" component={homeScreen} />
+        <HomeNav.Screen name="New Event" component={NewEvent} />
+        <HomeNav.Screen name="New Preset" component={NewPresetScreen} />
+        <HomeNav.Screen name="Select Preset" component={SelectPresetScreen} />
+      </HomeNav.Navigator>
+    </NavigationContainer>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+// const theme = {
+//   ...DarkTheme,
+//   colors: {
+//     ...DarkTheme.colors,
+//     primary: '#28B67E',
+//     accent: '#1C1C1C',
+//     background: '#0D1321',
+//     text: '#ECE9E9'
+//   }
+// };
+
+const App = () => {
+  return (
+    <PaperProvider>
+      <Navigation />
+    </PaperProvider>
+  );
+};
+
+
+export default App;
