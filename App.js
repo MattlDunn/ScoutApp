@@ -6,9 +6,9 @@ import 'react-native-gesture-handler';
 import { DarkTheme, Provider as PaperProvider } from 'react-native-paper';
 
 import homeScreen from './screens/homeScreen';
-import NewPresetScreen from './screens/newPresetScreen';
+import NewMetricsScreen from './screens/newMetricsScreen';
 import NewEvent from './screens/newEventScreen';
-import SelectPresetScreen from './screens/selectPresetScreen';
+import SelectMetricsScreen from './screens/selectMetricsScreen';
 
 const HomeNav = createNativeStackNavigator();
 
@@ -22,8 +22,8 @@ function Navigation({ theme }) {
         }}>
         <HomeNav.Screen name="Home" component={homeScreen} />
         <HomeNav.Screen name="New Event" component={NewEvent} />
-        <HomeNav.Screen name="New Preset" component={NewPresetScreen} />
-        <HomeNav.Screen name="Select Preset" component={SelectPresetScreen} />
+        <HomeNav.Screen name="New Metrics" component={NewMetricsScreen} />
+        <HomeNav.Screen name="Select Metrics" component={SelectMetricsScreen} />
       </HomeNav.Navigator>
     </NavigationContainer>
   );

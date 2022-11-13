@@ -7,6 +7,10 @@ const SelectPresetScreen = (props) => {
     const styles = useStyles(theme)
     const globalStyles = require('../globalStyles');
 
+    async function onLoad() {
+
+    }
+
     return (
         <View style={globalStyles.container}>
             <Text style={styles.test}>{props.route.params.eventInfo.name}</Text>

@@ -29,9 +29,9 @@ const NewEventScreen = ({ navigation }) => {
     ).catch((error) => console.log(error))
   }, []);
 
-  function navigateToPreset(eventInfo) {
+  function navigateToMetrics(eventInfo) {
     navigation.navigate(
-      'Select Preset',
+      'Select Metrics',
       { eventInfo }
     );
   }
@@ -70,7 +70,7 @@ const NewEventScreen = ({ navigation }) => {
             // prevEvent.week == props.eventInfo.week ?
 
           }
-          <TouchableOpacity style={globalStyles.fullWidth} onPress={() => navigateToPreset(props.eventInfo)}>
+          <TouchableOpacity style={globalStyles.fullWidth} onPress={() => navigateToMetrics(props.eventInfo)}>
             <Text style={styles.eventText}>{props.name}</Text>
           </TouchableOpacity>
         </View>
