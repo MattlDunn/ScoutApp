@@ -4,20 +4,24 @@ import { View, StyleSheet, Text, Button, Switch } from 'react-native';
 import { TextInput } from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { NavigationProp, ParamListBase } from '@react-navigation/native';
 
-const HomeScreen = ({ navigation }) => {
+export type Props = {
+  navigation: NavigationProp<ParamListBase>;
+}
 
+const HomeScreen: React.FC<Props> = ({ navigation }) => {
   const theme = useTheme();
   const styles = useStyles(theme)
-  const globalStyles = require('../globalStyles');
+  const globalStyles = require('./../../globalStyles');
 
   const [isLoading, setIsLoading] = useState(true);
 
   const [isEditUsername, setIsEditUsername] = useState(false);
-  const [username, setUsername] = useState(null);
+  const [username, setUsername] = useState<string | undefined>(undefined);
   const [usernameText, setUsernameText] = useState("");
 
-  const [isServer, setIsServer] = useState(null);
+  const [isServer, setIsServer] = useState<boolean | undefined>(undefined);
 
   const [eventList, setEventList] = useState(["Waterloo", "Northbay"]);
 
@@ -38,7 +42,7 @@ const HomeScreen = ({ navigation }) => {
     onLoad();
   }, []);
 
-  async function getFromStorage(key, defaultValue) {
+  async function getFromStorage(key: string, defaultValue: any) {
     try {
       const val = await AsyncStorage.getItem(key);
       return val == null ? defaultValue : JSON.parse(val);
@@ -69,7 +73,7 @@ const HomeScreen = ({ navigation }) => {
     return storedEventsList;
   }
 
-  async function writeToStorage(key, value) {
+  async function writeToStorage(key: string, value: any) {
     try {
       const jsonValue = JSON.stringify(value);
       await AsyncStorage.setItem(key, jsonValue);
@@ -78,14 +82,14 @@ const HomeScreen = ({ navigation }) => {
     }
   }
 
-  async function changeUsername(newName) {
+  async function changeUsername(newName: string) {
     setIsEditUsername(false);
     setUsername(newName);
     setUsernameText("");
     writeToStorage("username", newName)
   }
 
-  async function serverToggled(newIsServer) {
+  async function serverToggled(newIsServer: boolean) {
     setIsServer(newIsServer);
     writeToStorage("is_server", newIsServer);
   }
@@ -170,7 +174,7 @@ const HomeScreen = ({ navigation }) => {
   );
 };
 
-const useStyles = theme => (StyleSheet.create(({
+const useStyles = (theme: any) => (StyleSheet.create(({
   section: {
     margin: 10,
     marginBottom: 0,

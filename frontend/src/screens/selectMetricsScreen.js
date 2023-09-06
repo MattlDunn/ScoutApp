@@ -5,7 +5,7 @@ import React, { useEffect, useState } from 'react';
 const SelectPresetScreen = (props) => {
     const theme = useTheme();
     const styles = useStyles(theme)
-    const globalStyles = require('../globalStyles');
+    const globalStyles = require('../../globalStyles');
 
     async function onLoad() {
 
