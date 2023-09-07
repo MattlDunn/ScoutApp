@@ -2,7 +2,7 @@ import { NavigationProp, ParamListBase } from "@react-navigation/native";
 import React from "react";
 import { FlatList, SafeAreaView, Text } from "react-native"
 import { IconButton } from "react-native-paper";
-import { RoboEvent } from "../../../types/roboEvent";
+import { RoboEvent } from "../../types/roboEvent";
 
 const events: RoboEvent[] = []
 

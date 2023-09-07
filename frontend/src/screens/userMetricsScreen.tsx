@@ -2,11 +2,11 @@ import { NavigationProp, ParamListBase } from "@react-navigation/native";
 import React from "react";
 import { FlatList, SafeAreaView, Text } from "react-native"
 import { IconButton } from "react-native-paper";
-import { RoboMetric } from "../../../types/roboMetric";
+import { RoboMetric } from "../../types/roboMetric";
 
 const metrics: RoboMetric[] = []
 
-export type Props = {
+type Props = {
     navigation: NavigationProp<ParamListBase>;
 }
 

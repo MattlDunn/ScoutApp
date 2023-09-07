@@ -3,9 +3,9 @@ import React, { useEffect, useState } from 'react';
 import { View, SafeAreaView, Pressable } from 'react-native';
 import { FlatList } from 'react-native';
 import { List, Searchbar } from 'react-native-paper';
-import { RoboEvent } from '../../../types/roboEvent'
+import { RoboEvent } from '../../types/roboEvent'
 
-export type Props = {
+type Props = {
   navigation: NavigationProp<ParamListBase>;
 }
 

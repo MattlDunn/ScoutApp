@@ -6,7 +6,7 @@ import { NavigationProp, ParamListBase } from "@react-navigation/native";
 
 const MetricsNav = createNativeStackNavigator();
 
-export type Props = {
+type Props = {
     navigation: NavigationProp<ParamListBase>;
 }
 

@@ -6,7 +6,7 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { NavigationProp, ParamListBase } from '@react-navigation/native';
 
-export type Props = {
+type Props = {
   navigation: NavigationProp<ParamListBase>;
 }
 
