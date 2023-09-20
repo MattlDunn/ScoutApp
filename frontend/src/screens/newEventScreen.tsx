@@ -103,5 +103,4 @@ const NewEventScreen: React.FC<Props> = ({ navigation }) => {
   );
 };
 
-
 export default NewEventScreen;
