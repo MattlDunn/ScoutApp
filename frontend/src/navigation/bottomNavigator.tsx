@@ -9,51 +9,51 @@ import MetricsNavigation from "./metricsNavigation";
 const Tab = createBottomTabNavigator();
 
 const BottomNavigator: React.FC = () => {
-    return (
-        <NavigationContainer>
-            <Tab.Navigator
-                initialRouteName='Events'
-                screenOptions={({ route }) => ({
-                    headerShown: false,
-                    tabBarIcon: ({ focused, color, size }) => {
-                        let iconName: string;
+  return (
+    <NavigationContainer>
+      <Tab.Navigator
+        initialRouteName="Events"
+        screenOptions={({ route }) => ({
+          headerShown: false,
+          tabBarIcon: ({ focused, color, size }) => {
+            let iconName: string;
 
-                        if (route.name === 'Events Stack') {
-                            iconName = 'calendar-outline'
-                        } else if (route.name == 'Metrics Stack') {
-                            iconName = 'analytics-outline'
-                        } else {
-                            iconName = 'settings-outline'
-                        }
+            if (route.name === "Events Stack") {
+              iconName = "calendar-outline";
+            } else if (route.name == "Metrics Stack") {
+              iconName = "analytics-outline";
+            } else {
+              iconName = "settings-outline";
+            }
 
-                        return <Ionicons name={iconName} size={size} color={color} />
-                    }
-                })}
-            >
-                <Tab.Screen
-                    name='Events Stack'
-                    component={EventsNavigation}
-                    options={{
-                        title: 'Events'
-                    }}
-                />
-                <Tab.Screen
-                    name='Metrics Stack'
-                    component={MetricsNavigation}
-                    options={{
-                        title: 'Metrics'
-                    }}
-                />
-                <Tab.Screen
-                    name='Settings Stack'
-                    component={SettingsScreen}
-                    options={{
-                        title: 'Settings'
-                    }}
-                />
-            </Tab.Navigator>
-        </NavigationContainer>
-    )
-}
+            return <Ionicons name={iconName} size={size} color={color} />;
+          },
+        })}
+      >
+        <Tab.Screen
+          name="Events Stack"
+          component={EventsNavigation}
+          options={{
+            title: "Events",
+          }}
+        />
+        <Tab.Screen
+          name="Metrics Stack"
+          component={MetricsNavigation}
+          options={{
+            title: "Metrics",
+          }}
+        />
+        <Tab.Screen
+          name="Settings Stack"
+          component={SettingsScreen}
+          options={{
+            title: "Settings",
+          }}
+        />
+      </Tab.Navigator>
+    </NavigationContainer>
+  );
+};
 
-export default BottomNavigator
+export default BottomNavigator;

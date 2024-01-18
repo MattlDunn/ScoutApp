@@ -7,16 +7,16 @@ import { NavigationProp, ParamListBase } from "@react-navigation/native";
 const MetricsNav = createNativeStackNavigator();
 
 type Props = {
-    navigation: NavigationProp<ParamListBase>;
-}
+  navigation: NavigationProp<ParamListBase>;
+};
 
 const MetricsNavigation: React.FC<Props> = ({ navigation }) => {
-    return (
-        <MetricsNav.Navigator>
-            <MetricsNav.Screen name="Metrics" component={UserMetricsScreen} />
-            <MetricsNav.Screen name="New Metric" component={NewMetricScreen} />
-        </MetricsNav.Navigator>
-    )
-}
+  return (
+    <MetricsNav.Navigator>
+      <MetricsNav.Screen name="Metrics" component={UserMetricsScreen} />
+      <MetricsNav.Screen name="New Metric" component={NewMetricScreen} />
+    </MetricsNav.Navigator>
+  );
+};
 
-export default MetricsNavigation
+export default MetricsNavigation;

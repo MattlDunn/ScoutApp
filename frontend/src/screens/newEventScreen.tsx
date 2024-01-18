@@ -1,40 +1,37 @@
-import { NavigationProp, ParamListBase } from '@react-navigation/native';
-import React, { useEffect, useState } from 'react';
-import { View, SafeAreaView, Pressable } from 'react-native';
-import { FlatList } from 'react-native';
-import { List, Searchbar } from 'react-native-paper';
-import { RoboEvent } from '../../types/roboEvent'
+import { NavigationProp, ParamListBase } from "@react-navigation/native";
+import React, { useEffect, useState } from "react";
+import { View, SafeAreaView, Pressable } from "react-native";
+import { FlatList } from "react-native";
+import { List, Searchbar } from "react-native-paper";
+import { RoboEvent } from "../../types/roboEvent";
 
 type Props = {
   navigation: NavigationProp<ParamListBase>;
-}
+};
 
 const NewEventScreen: React.FC<Props> = ({ navigation }) => {
-  const [search, setSearch] = useState<string>('');
+  const [search, setSearch] = useState<string>("");
   const [allEvents, setAllEvents] = useState<RoboEvent[]>([]);
-  const [displayedEvents, setDisplayedEvents] = useState<RoboEvent[]>([])
+  const [displayedEvents, setDisplayedEvents] = useState<RoboEvent[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [prevEvent, setPrevEvent] = useState(null);
 
   useEffect(() => {
     const year = new Date().getFullYear();
 
-    fetch(
-      `https://www.thebluealliance.com/api/v3/events/${year}`, {
+    fetch(`https://www.thebluealliance.com/api/v3/events/${year}`, {
       headers: {
-        'X-TBA-Auth-Key': 'wWPjDv3pnMgaH359r4b7EfK34zcKhlFagNTyBZuFV3Uj6Bpv967k4pTkHmNElfvo'
-      }
-    }
-    ).then((response) => response.json()
-    ).then((json) => sortEventList(json)
-    ).catch((error) => console.log(error))
+        "X-TBA-Auth-Key":
+          "wWPjDv3pnMgaH359r4b7EfK34zcKhlFagNTyBZuFV3Uj6Bpv967k4pTkHmNElfvo",
+      },
+    })
+      .then((response) => response.json())
+      .then((json) => sortEventList(json))
+      .catch((error) => console.log(error));
   }, []);
 
   function navigateToMetrics(eventInfo: RoboEvent) {
-    navigation.navigate(
-      'Select Metrics',
-      { eventInfo }
-    );
+    navigation.navigate("Select Metrics", { eventInfo });
   }
 
   function compareEvents(event1: RoboEvent, event2: RoboEvent) {
@@ -65,40 +62,42 @@ const NewEventScreen: React.FC<Props> = ({ navigation }) => {
   }
 
   const searchEvent = (text: string) => {
-    setSearch(text)
+    setSearch(text);
     if (text.length > 0) {
-      setDisplayedEvents(allEvents.filter((event) => {
-        return event.name.toLowerCase().includes(search.toLowerCase().trim())
-      }))
+      setDisplayedEvents(
+        allEvents.filter((event) => {
+          return event.name.toLowerCase().includes(search.toLowerCase().trim());
+        }),
+      );
     } else {
-      setDisplayedEvents(allEvents)
+      setDisplayedEvents(allEvents);
     }
-  }
+  };
 
   return (
     <View>
       <Searchbar
-        placeholder='Search...'
+        placeholder="Search..."
         onChangeText={searchEvent}
         value={search}
       />
       <SafeAreaView>
         <FlatList
           data={displayedEvents}
-          renderItem={
-            ({ item }) =>
-              <Pressable onPress={() => {
-                navigateToMetrics(item)
-              }}>
-                <List.Item title={item.name} />
-              </Pressable>
-          }
+          renderItem={({ item }) => (
+            <Pressable
+              onPress={() => {
+                navigateToMetrics(item);
+              }}
+            >
+              <List.Item title={item.name} />
+            </Pressable>
+          )}
           contentContainerStyle={{
-            paddingBottom: 120
+            paddingBottom: 120,
           }}
         />
       </SafeAreaView>
-
     </View>
   );
 };

@@ -1,4 +1,4 @@
 export type RoboEvent = {
-    name: string;
-    week: number;
-}
+  name: string;
+  week: number;
+};
