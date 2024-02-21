@@ -1,5 +1,5 @@
 import { NavigationProp, ParamListBase } from "@react-navigation/native";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FlatList, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Button, Dialog, Divider, Portal, TextInput } from "react-native-paper";
@@ -25,13 +25,23 @@ const MetricTypeIcons = {
   [MetricTypes.Checkbox]: "checkbox-outline",
 };
 
-const NewMetricScreen: React.FC<Props> = ({ navigation }) => {
+const NewPresetScreen: React.FC<Props> = ({ navigation }) => {
+  useEffect(() => {
+    navigation.setOptions({
+      headerRight: () => <Button onPress={saveMetrics}>Done</Button>,
+    });
+  }, [navigation]);
+
   const [metricItems, setMetricItems] = useState<RoboMetric[]>([]);
   const [newMetricName, setNewMetricName] = useState<string>("");
   const [newMetricType, setNewMetricType] = useState<MetricTypes>(
-    MetricTypes.Label,
+    MetricTypes.Label
   );
   const [showDialog, setShowDialog] = useState<boolean>(false);
+
+  const saveMetrics = () => {
+    
+  };
 
   const metricType = (metricType: string) => {
     return (
@@ -151,4 +161,4 @@ const NewMetricScreen: React.FC<Props> = ({ navigation }) => {
   );
 };
 
-export default NewMetricScreen;
+export default NewPresetScreen;

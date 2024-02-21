@@ -30,8 +30,8 @@ const NewEventScreen: React.FC<Props> = ({ navigation }) => {
       .catch((error) => console.log(error));
   }, []);
 
-  function navigateToMetrics(eventInfo: RoboEvent) {
-    navigation.navigate("Select Metrics", { eventInfo });
+  function navigateToPresets(eventInfo: RoboEvent) {
+    navigation.navigate("Select Presets", { eventInfo });
   }
 
   function compareEvents(event1: RoboEvent, event2: RoboEvent) {
@@ -87,7 +87,7 @@ const NewEventScreen: React.FC<Props> = ({ navigation }) => {
           renderItem={({ item }) => (
             <Pressable
               onPress={() => {
-                navigateToMetrics(item);
+                navigateToPresets(item);
               }}
             >
               <List.Item title={item.name} />

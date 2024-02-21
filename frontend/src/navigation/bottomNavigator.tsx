@@ -4,7 +4,7 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 import SettingsScreen from "../screens/settingsScreen";
 import EventsNavigation from "./eventsNavigation";
 import React from "react";
-import MetricsNavigation from "./metricsNavigation";
+import PresetsNavigation from "./presetsNavigation";
 
 const Tab = createBottomTabNavigator();
 
@@ -20,7 +20,7 @@ const BottomNavigator: React.FC = () => {
 
             if (route.name === "Events Stack") {
               iconName = "calendar-outline";
-            } else if (route.name == "Metrics Stack") {
+            } else if (route.name == "Presets Stack") {
               iconName = "analytics-outline";
             } else {
               iconName = "settings-outline";
@@ -38,10 +38,10 @@ const BottomNavigator: React.FC = () => {
           }}
         />
         <Tab.Screen
-          name="Metrics Stack"
-          component={MetricsNavigation}
+          name="Presets Stack"
+          component={PresetsNavigation}
           options={{
-            title: "Metrics",
+            title: "Presets",
           }}
         />
         <Tab.Screen

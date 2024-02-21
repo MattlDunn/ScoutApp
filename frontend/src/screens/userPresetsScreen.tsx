@@ -2,20 +2,20 @@ import { NavigationProp, ParamListBase } from "@react-navigation/native";
 import React from "react";
 import { FlatList, SafeAreaView, Text } from "react-native";
 import { IconButton } from "react-native-paper";
-import { RoboMetric } from "../../types/roboMetric";
+import { RoboPreset } from "../../types/roboPreset";
 
-const metrics: RoboMetric[] = [];
+const presets: RoboPreset[] = [];
 
 type Props = {
   navigation: NavigationProp<ParamListBase>;
 };
 
-const UserMetricsScreen: React.FC<Props> = ({ navigation }) => {
+const UserPresetsScreen: React.FC<Props> = ({ navigation }) => {
   React.useEffect(() => {
     navigation.setOptions({
       headerRight: () => (
         <IconButton
-          onPress={() => navigation.navigate("New Metric")}
+          onPress={() => navigation.navigate("New Preset")}
           icon="plus"
         />
       ),
@@ -25,11 +25,11 @@ const UserMetricsScreen: React.FC<Props> = ({ navigation }) => {
   return (
     <SafeAreaView>
       <FlatList
-        data={metrics}
+        data={presets}
         renderItem={({ item }) => <Text>{item.name}</Text>}
       />
     </SafeAreaView>
   );
 };
 
-export default UserMetricsScreen;
+export default UserPresetsScreen;
