@@ -1,3 +1,5 @@
+import uuid from 'react-native-uuid';
+
 enum MetricTypes {
   Label = "Label",
   Text = "Text",
@@ -9,15 +11,18 @@ class RoboMetric {
   name: string;
   type: MetricTypes;
   value: string | number | boolean;
+  id: string;
 
   constructor(
     name: string,
     type: MetricTypes,
-    value?: string | number | boolean
+    value?: string | number | boolean,
+    id?: string
   ) {
     this.name = name;
     this.type = type;
     this.value = value ?? this.defaultValue();
+    this.id = id ?? uuid.v4().toString();
   }
 
   private defaultValue(): string | number | boolean {

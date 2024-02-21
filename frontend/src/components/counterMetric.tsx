@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { RoboMetric } from "../../types/roboMetric";
 import { View } from "react-native";
 import { IconButton, Text } from "react-native-paper";
@@ -8,6 +8,28 @@ type Props = {
 };
 
 const CounterMetric: React.FC<Props> = ({ metric }) => {
+  const [compMetric, setCompMetric] = useState<RoboMetric>(metric);
+
+  const increment = () => {
+    let updated = new RoboMetric(
+      compMetric.name,
+      compMetric.type,
+      (compMetric.value as number) + 1,
+      compMetric.id
+    );
+    setCompMetric(updated);
+  };
+
+  const decrement = () => {
+    let updated = new RoboMetric(
+      compMetric.name,
+      compMetric.type,
+      (compMetric.value as number) - 1,
+      compMetric.id
+    );
+    setCompMetric(updated);
+  };
+
   return (
     <View
       style={{
@@ -24,9 +46,9 @@ const CounterMetric: React.FC<Props> = ({ metric }) => {
           alignItems: "center",
         }}
       >
-        <IconButton icon="minus" />
-        <Text>{metric.value}</Text>
-        <IconButton icon="plus" />
+        <IconButton icon="minus" onPress={decrement} />
+        <Text>{compMetric.value}</Text>
+        <IconButton icon="plus" onPress={increment} />
       </View>
     </View>
   );

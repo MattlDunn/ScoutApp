@@ -116,7 +116,7 @@ const NewMetricScreen: React.FC<Props> = ({ navigation }) => {
         <DraggableFlatList
           data={metricItems}
           renderItem={metricItem}
-          keyExtractor={(item) => item.name}
+          keyExtractor={(item) => item.id}
           onDragEnd={({ data }) => setMetricItems(data)}
           contentContainerStyle={{
             rowGap: 10,

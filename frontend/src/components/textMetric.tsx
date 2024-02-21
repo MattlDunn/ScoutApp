@@ -1,13 +1,25 @@
-import React from "react";
+import React, { useState } from "react";
 import { RoboMetric } from "../../types/roboMetric";
 import { View } from "react-native";
-import { Divider, Text, TextInput } from "react-native-paper";
+import { Text, TextInput } from "react-native-paper";
 
 type Props = {
   metric: RoboMetric;
 };
 
 const TextMetric: React.FC<Props> = ({ metric }) => {
+  const [compMetric, setCompMetric] = useState<RoboMetric>(metric);
+
+  const updateText = (text: string) => {
+    let updated = new RoboMetric(
+      compMetric.name,
+      compMetric.type,
+      text,
+      compMetric.id
+    );
+    setCompMetric(updated);
+  };
+
   return (
     <View
       style={{
@@ -23,7 +35,8 @@ const TextMetric: React.FC<Props> = ({ metric }) => {
         style={{
           flexGrow: 1,
         }}
-        value={metric.value.toString()}
+        value={compMetric.value.toString()}
+        onChangeText={(text) => updateText(text)}
       />
     </View>
   );
