@@ -1,5 +1,5 @@
 import { NavigationProp, ParamListBase } from "@react-navigation/native";
-import React from "react";
+import React, { useEffect } from "react";
 import { FlatList, SafeAreaView, Text } from "react-native";
 import { IconButton } from "react-native-paper";
 import { RoboPreset } from "../../types/roboPreset";
@@ -11,7 +11,7 @@ type Props = {
 };
 
 const UserPresetsScreen: React.FC<Props> = ({ navigation }) => {
-  React.useEffect(() => {
+  useEffect(() => {
     navigation.setOptions({
       headerRight: () => (
         <IconButton
